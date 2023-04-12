@@ -35,6 +35,8 @@ app.get('/', (req, res) => {
     })
 }) 
 
+app.use('/api/v1/products', productRouter)
+
 app.listen(port, () => {
     console.log(`Server started at port ${port}`)
 })

@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize')
 
 const db = require('../utils/database')
+const { validate } = require('uuid')
 
 const Products = db.define('products', {
 
@@ -9,16 +10,35 @@ const Products = db.define('products', {
         primaryKey: true,
         autoIncrement: true
     },
-    description: {
+    name: {
         type: DataTypes.STRING,
+        validate: {
+          len: [1, 255]
+        },
         allowNull: false
-    },
-    price: {
+      },
+      description: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        validate: {
+          notEmpty: true
+        }
+      },
+      price: {
         type: DataTypes.FLOAT,
-    },
-    stock: {
+        allowNull: false,
+        validate: {
+          isNumeric: true
+        }
+      },
+      stock: {
         type: DataTypes.INTEGER,
-    },
-})
+        allowNull: false,
+        defaultValue: 1,
+        validate: {
+          isNumeric: true
+        }
+      }
+    })
 
 module.exports = Products

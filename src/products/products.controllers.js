@@ -3,9 +3,6 @@ const Products = require("../models/products.models")
 const findAllProducts = async() => {
     //? Your code here:
     const products = await Products.findAll({
-        include:{
-            model: Products
-        }
     })
     return products
 }
@@ -23,6 +20,7 @@ const findProductById = async(id) => {
 const createProduct = async(productObj) => {
     //? Your code here:
     const newProduct = await Products.create({
+        name: productObj.name,
         description: productObj.description,
         price: productObj.price,
         stock: productObj.stock,
